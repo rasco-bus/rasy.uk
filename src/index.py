@@ -1,11 +1,7 @@
-from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from js import Response
 
-app = FastAPI()
-
-@app.get("/", response_class=HTMLResponse)
-async def root():
-    html_content = """
+async def on_fetch(request, env):
+    html = """
     <!DOCTYPE html>
     <html>
     <head>
@@ -38,4 +34,10 @@ async def root():
     </body>
     </html>
     """
-    return html_content
+    
+    # Safely create the response first
+    res = Response.new(html)
+    # Safely add the HTML header on a separate line to prevent Pyodide from crashing
+    res.headers.set("Content-Type", "text/html")
+    
+    return res
