@@ -1,4 +1,4 @@
-name = "coming-soon-worker"
+name = 'rasy-uk'
 main = "src/index.py"
 compatibility_date = "2024-03-29"
 compatibility_flags = ["python_workers"]
