@@ -6,6 +6,8 @@ async def on_fetch(request, env):
     <html>
     <head>
         <title>Coming Soon</title>
+        <!-- Your GitHub logo added here -->
+        <link rel="icon" href="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/tabicon.png" type="image/png">
         <style>
             body { 
                 display: flex; 
