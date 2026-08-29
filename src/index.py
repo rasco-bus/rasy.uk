@@ -40,6 +40,7 @@ async def on_fetch(request, env):
     <body>
         <h1>COMING SOON</h1>
         <p>Our new website is under construction.</p>
+        <p>Please call 07842 581975.</p>
     </body>
     </html>
     """
