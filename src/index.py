@@ -1,12 +1,19 @@
-from js import Response
+from js import Response, URL
 
 async def on_fetch(request, env):
+    # 1. Check what the browser is trying to load
+    req_url = URL.new(request.url)
+    
+    # 2. If it is automatically looking for the favicon, send it to your GitHub image
+    if req_url.pathname == "/favicon.ico":
+        return Response.redirect("https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/tabicon.png", 301)
+
+    # 3. Otherwise, load the normal HTML website
     html = """
     <!DOCTYPE html>
     <html>
     <head>
         <title>Coming Soon</title>
-        <!-- Your GitHub logo added here -->
         <link rel="icon" href="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/tabicon.png" type="image/png">
         <style>
             body { 
