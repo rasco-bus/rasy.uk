@@ -14,6 +14,8 @@ async def on_fetch(request, env):
     <html>
     <head>
         <title>Coming Soon</title>
+        <!-- Google Search Console Verification Tag -->
+        <meta name="google-site-verification" content="bJuODXWAuViJT6d-FQSEnBpYx_e4-nNJVrlkKnHyd3s" />
         <link rel="icon" href="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/tabicon.png" type="image/png">
         <style>
             body { 
@@ -28,17 +30,15 @@ async def on_fetch(request, env):
                 color: white;
                 position: relative;
             }
-            /* Moved the positioning to the link wrapper */
             .logo-link {
                 position: absolute;
                 top: 20px;
                 left: 20px;
             }
-            /* Kept the sizing on the image */
             .logo {
                 width: 150px; 
                 height: auto;
-                border: none; /* Prevents default borders on linked images in some older browsers */
+                border: none; 
             }
             h1 { 
                 font-size: 5rem; 
@@ -51,7 +51,6 @@ async def on_fetch(request, env):
         </style>
     </head>
     <body>
-        <!-- Wrapped the image in an anchor tag pointing to the root directory -->
         <a href="/" class="logo-link">
             <img src="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/toplefticon.png" alt="Logo" class="logo">
         </a>
