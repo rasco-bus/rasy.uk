@@ -26,14 +26,19 @@ async def on_fetch(request, env):
                 font-family: 'Courier New', Courier, monospace; 
                 background-color: #1a1a1a; 
                 color: white;
-                position: relative; /* Added to keep absolute positioning relative to the body */
+                position: relative;
             }
-            .logo {
+            /* Moved the positioning to the link wrapper */
+            .logo-link {
                 position: absolute;
                 top: 20px;
                 left: 20px;
-                width: 150px; /* Adjust this value to make your logo bigger or smaller */
+            }
+            /* Kept the sizing on the image */
+            .logo {
+                width: 150px; 
                 height: auto;
+                border: none; /* Prevents default borders on linked images in some older browsers */
             }
             h1 { 
                 font-size: 5rem; 
@@ -46,8 +51,10 @@ async def on_fetch(request, env):
         </style>
     </head>
     <body>
-        <!-- Added the logo image here -->
-        <img src="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/toplefticon.png" alt="Logo" class="logo">
+        <!-- Wrapped the image in an anchor tag pointing to the root directory -->
+        <a href="/" class="logo-link">
+            <img src="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/toplefticon.png" alt="Logo" class="logo">
+        </a>
         
         <h1>COMING SOON</h1>
         <p>Our new website is under construction.</p>
