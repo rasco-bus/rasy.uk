@@ -1,101 +1,101 @@
 from js import Response, URL
 
+# 1. Define static content at the module level so it's only created once
+ROBOTS_CONTENT = "User-agent: *\nAllow: /\n"
+
+HTML_CONTENT = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coming Soon - Rasy UK</title>
+    <meta name="description" content="Official website for Rasy UK. Currently under construction. Contact us for inquiries." />
+    <meta name="google-site-verification" content="bJuODXWAuViJT6d-FQSEnBpYx_e4-nNJVrlkKnHyd3s" />
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Rasy UK" />
+    <meta property="og:description" content="Our new website is under construction. Contact us today." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/toplefticon.png" />
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/tabicon.png" type="image/png">
+    <style>
+        body { 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: #1a1a1a; 
+            color: white;
+            position: relative;
+            text-align: center;
+        }
+        .logo-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .logo {
+            width: 150px; 
+            height: auto;
+            border: none; 
+        }
+        h1 { 
+            font-size: 5rem; 
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            margin: 10px 0;
+        }
+        a.contact {
+            color: white;
+            text-decoration: underline;
+        }
+        a.contact:hover {
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="logo-link">
+        <img src="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/toplefticon.png" alt="Rasy UK Company Logo" class="logo">
+    </a>
+    
+    <h1>COMING SOON</h1>
+    <p>Our new website is under construction.</p>
+    <p>Please call <a href="tel:+447842581975" class="contact">07842 581975</a></p>
+    <p>or email <a href="mailto:contact@rasy.uk" class="contact">contact@rasy.uk</a>.</p>
+</body>
+</html>
+"""
+
 async def on_fetch(request, env):
     req_url = URL.new(request.url)
     
-    # 1. Favicon route
-    if req_url.pathname == "/favicon.ico":
+    # Evaluate the path once
+    path = req_url.pathname
+    
+    # 2. Favicon route
+    if path == "/favicon.ico":
         res = Response.redirect("https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/tabicon.png", 301)
         res.headers.set("Cache-Control", "public, max-age=86400")
         return res
         
-    # 2. Robots.txt route (NEW)
-    elif req_url.pathname == "/robots.txt":
-        # This tells all search engines (*) they are allowed to crawl your entire site (/)
-        robots_content = "User-agent: *\nAllow: /\n"
-        
-        res = Response.new(robots_content)
+    # 3. Robots.txt route
+    if path == "/robots.txt":
+        res = Response.new(ROBOTS_CONTENT)
         res.headers.set("Content-Type", "text/plain")
         res.headers.set("Cache-Control", "public, max-age=86400")
         return res
 
-    # 3. Default route for your website
-    else:
-        html = """
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Coming Soon - Rasy UK</title>
-            <meta name="description" content="Official website for Rasy UK. Currently under construction. Contact us for inquiries." />
-            <meta name="google-site-verification" content="bJuODXWAuViJT6d-FQSEnBpYx_e4-nNJVrlkKnHyd3s" />
-            
-            <!-- Open Graph Tags -->
-            <meta property="og:title" content="Rasy UK - Coming Soon" />
-            <meta property="og:description" content="Our new website is under construction. Contact us today." />
-            <meta property="og:image" content="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/toplefticon.png" />
-            
-            <link rel="icon" href="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/tabicon.png" type="image/png">
-            <style>
-                body { 
-                    display: flex; 
-                    flex-direction: column;
-                    justify-content: center; 
-                    align-items: center; 
-                    height: 100vh; 
-                    margin: 0; 
-                    font-family: 'Courier New', Courier, monospace; 
-                    background-color: #1a1a1a; 
-                    color: white;
-                    position: relative;
-                    text-align: center;
-                }
-                .logo-link {
-                    position: absolute;
-                    top: 20px;
-                    left: 20px;
-                }
-                .logo {
-                    width: 150px; 
-                    height: auto;
-                    border: none; 
-                }
-                h1 { 
-                    font-size: 5rem; 
-                    margin-bottom: 10px;
-                }
-                p {
-                    font-size: 1.5rem;
-                    color: #a0a0a0;
-                    margin: 10px 0;
-                }
-                a.contact {
-                    color: white;
-                    text-decoration: underline;
-                }
-                a.contact:hover {
-                    color: #cccccc;
-                }
-            </style>
-        </head>
-        <body>
-            <a href="/" class="logo-link">
-                <img src="https://raw.githubusercontent.com/rasco-bus/rasy.uk/main/images/toplefticon.png" alt="Rasy UK Company Logo" class="logo">
-            </a>
-            
-            <h1>COMING SOON</h1>
-            <p>Our new website is under construction.</p>
-            <p>Please call <a href="tel:+447842581975" class="contact">07842 581975</a></p>
-            <p>or email <a href="mailto:contact@rasy.uk" class="contact">contact@rasy.uk</a>.</p>
-        </body>
-        </html>
-        """
-        
-        res = Response.new(html)
-        res.headers.set("Content-Type", "text/html")
-        
-        # Security Headers
-        res.headers.set("X-Frame-Options", "DENY")
-        res.headers.set("X-Content-Type-Options", "nosniff")
-        
-        return res
+    # 4. Default route for your website
+    res = Response.new(HTML_CONTENT)
+    res.headers.set("Content-Type", "text/html")
+    res.headers.set("X-Frame-Options", "DENY")
+    res.headers.set("X-Content-Type-Options", "nosniff")
+    
+    return res
