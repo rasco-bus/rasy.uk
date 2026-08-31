@@ -8,7 +8,7 @@ HTML_CONTENT = """
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Coming Soon - Rasy UK</title>
+    <title>Rasy UK</title>
     <meta name="description" content="Official website for Rasy UK. Currently under construction. Contact us for inquiries." />
     <meta name="google-site-verification" content="bJuODXWAuViJT6d-FQSEnBpYx_e4-nNJVrlkKnHyd3s" />
     
