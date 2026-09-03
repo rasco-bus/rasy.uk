@@ -27,14 +27,32 @@ HTML_CONTENT = """
             flex-direction: column;
             justify-content: center; 
             align-items: center; 
-            height: 100vh; 
+            min-height: 100vh; 
             margin: 0; 
             font-family: 'Courier New', Courier, monospace; 
-            background-color: #1a1a1a; 
             color: white;
             position: relative;
             text-align: center;
+
+            /* Sky Blue & Grey animated gradient */
+            background: linear-gradient(-45deg, #1f2937, #3b82f6, #374151, #60a5fa);
+            background-size: 400% 400%;
+            animation: gradientShift 14s ease infinite;
         }
+
+        /* Animation keyframes for the smooth moving effect */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         .logo-link {
             position: absolute;
             top: 20px;
@@ -48,18 +66,21 @@ HTML_CONTENT = """
         h1 { 
             font-size: 5rem; 
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-        p {
-            font-size: 1.5rem;
-            color: #a0a0a0;
-            margin: 10px 0;
+        p { 
+            font-size: 1.5rem; 
+            color: #f3f4f6; 
+            margin: 10px 0; 
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
         }
-        a.contact {
-            color: white;
-            text-decoration: underline;
+        a.contact { 
+            color: #ffffff; 
+            font-weight: bold;
+            text-decoration: underline; 
         }
-        a.contact:hover {
-            color: #cccccc;
+        a.contact:hover { 
+            color: #d1d5db; 
         }
     </style>
 </head>
