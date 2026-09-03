@@ -12,6 +12,9 @@ HTML_CONTENT = """
     <meta name="description" content="Official website for Rasy UK. Currently under construction. Contact us for inquiries." />
     <meta name="google-site-verification" content="bJuODXWAuViJT6d-FQSEnBpYx_e4-nNJVrlkKnHyd3s" />
     
+    <!-- FIX: Added Canonical Tag -->
+    <link rel="canonical" href="https://rasy.uk/" />
+    
     <!-- Open Graph Tags -->
     <meta property="og:title" content="Rasy UK" />
     <meta property="og:description" content="Our new website is under construction. Contact us today." />
@@ -92,7 +95,11 @@ async def on_fetch(request, env):
         res.headers.set("Cache-Control", "public, max-age=86400")
         return res
 
-    # 4. Default route for your website
+    # FIX: Redirect any random URL paths to the homepage to prevent duplicate content
+    if path != "/":
+        return Response.redirect("https://rasy.uk/", 301)
+
+    # 4. Default route strictly for the root website ("/")
     res = Response.new(HTML_CONTENT)
     res.headers.set("Content-Type", "text/html")
     res.headers.set("X-Frame-Options", "DENY")
